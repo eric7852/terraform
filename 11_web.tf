@@ -28,3 +28,10 @@ resource "aws_instance" "seungjun_weba" {
     Name = "seungjun-weba"
   }
 }
+
+resource "aws_eip" "seungjun_web_eip" {
+  vpc                           = true
+  instance                      = aws_instance.seungjun_weba.id
+  associate_with_private_ip     = "10.0.0.11"
+  depends_on                    = [aws_internet_gateway.seungjun_ig]
+}
